@@ -5,6 +5,11 @@ const cors = require('cors');
 
 const app = express();
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+ 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 
@@ -51,9 +56,9 @@ app.post('/api/form', cors(), async (req, res, next) => {
     } catch(err) {
         next(err);
     }
-})
+});
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
   console.log(`Mixing it up on port ${PORT}`)
-})
+});
